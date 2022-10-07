@@ -1,6 +1,8 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Employer;
+import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,11 +15,23 @@ import java.util.Optional;
 @RequestMapping("employers")
 public class EmployerController {
 
+    @Autowired
+    private EmployerRepository employerRepository;
+    // add index method
+    @GetMapping
+    public string index{
+        model.addAttribute("employers", employers);
+        //return? to employer index?  Ask Adam
+    }
+
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
         model.addAttribute(new Employer());
         return "employers/add";
+
+
+
     }
 
     @PostMapping("add")
@@ -27,14 +41,17 @@ public class EmployerController {
         if (errors.hasErrors()) {
             return "employers/add";
         }
+        //add method to add to the employerRepository
+        employerRepository.saveOrUpdate(newEmployer)
 
         return "redirect:";
     }
 
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
-
-        Optional optEmployer = null;
+// completely lost here.
+//        Optional optEmployer = null;
+        optEmployer = employerId.findByID(id)
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();
             model.addAttribute("employer", employer);

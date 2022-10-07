@@ -10,6 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployerRepository extends CrudRepository<Employer, Integer> {
 
-    @Autowired
-    private EmployerRepository employerRepository;
+
 }
