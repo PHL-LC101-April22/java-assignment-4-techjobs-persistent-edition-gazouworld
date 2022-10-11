@@ -11,12 +11,11 @@ import java.util.Objects;
 public abstract class AbstractEntity {
     @Id
     @GeneratedValue
-
     private int id;
-
-    private String name;
     @NotBlank
-    @Size(max = 500)
+    @Size(max = 50, min = 4)
+    private String name;
+
 
     public int getId() {
         return id;

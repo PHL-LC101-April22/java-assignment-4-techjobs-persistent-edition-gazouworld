@@ -11,4 +11,11 @@ public class Skill extends AbstractEntity {
 
     }
 
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
 }

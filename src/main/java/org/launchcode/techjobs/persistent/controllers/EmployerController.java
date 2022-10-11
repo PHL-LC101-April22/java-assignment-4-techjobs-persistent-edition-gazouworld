@@ -19,18 +19,15 @@ public class EmployerController {
     private EmployerRepository employerRepository;
     // add index method
     @GetMapping
-    public string index{
-        model.addAttribute("employers", employers);
-        //return? to employer index?  Ask Adam
+    public String index(Model model){
+        model.addAttribute("employers", employerRepository.findAll());
+        return "employers/index";
     }
-
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
         model.addAttribute(new Employer());
         return "employers/add";
-
-
 
     }
 
@@ -42,16 +39,15 @@ public class EmployerController {
             return "employers/add";
         }
         //add method to add to the employerRepository
-        employerRepository.saveOrUpdate(newEmployer)
+        employerRepository.save(newEmployer);
 
         return "redirect:";
     }
 
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
-// completely lost here.
-//        Optional optEmployer = null;
-        optEmployer = employerId.findByID(id)
+
+        Optional optEmployer = employerRepository.findById(employerId);
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();
             model.addAttribute("employer", employer);
