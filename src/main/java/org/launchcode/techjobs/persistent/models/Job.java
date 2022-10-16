@@ -1,22 +1,30 @@
 package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.*;
+import java.util.List;
+//above added
 
 @Entity
-public class Job extends AbstractEntity {
-    //below here where I change to Employer?
+//section 3
+    public class Job extends AbstractEntity {
     @ManyToOne
     private Employer employer;
-    private String skills;
+    @ManyToMany
+    private List<Skill> skills;
 
     public Job() {
     }
 //Replace Employer below?
-    public Job(Employer anEmployer, String someSkills) {
+//    public Job(Employer anEmployer, String someSkills) {
+
+//   section 3
+    public Job(Employer anEmployer, List<Skill> someSkills) {
         super();
         this.employer = anEmployer;
+        //section 4
         this.skills = someSkills;
     }
+    //Getters and Setters
 
     public Employer getEmployer(){
         return employer;
@@ -26,30 +34,11 @@ public class Job extends AbstractEntity {
         this.employer = employer;
     }
 
-}
-    // Getters and setters.
+   public List<Skill> getSkills (){
+       return skills;
+   }
+   public void setSkills(List<Skill> skills){
+       this.skills = skills;
+   }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getEmployer() {
-//        return employer;
-//    }
-//
-//    public void setEmployer(String employer) {
-//        this.employer = employer;
-//    }
-//
-//    public String getSkills() {
-//        return skills;
-//    }
-//
-//    public void setSkills(String skills) {
-//        this.skills = skills;
-//    }
-//}
+}
